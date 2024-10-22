@@ -49,7 +49,7 @@ segmented/custom-content
 
 ## Custom Style
 
-Set custom styles using CSS varibles.
+Set default slot to render custom content.
 
 :::demo
 
@@ -81,9 +81,9 @@ segmented/custom-style
 
 ### Slots
 
-| Name    | Description     | Type                        |
-| ------- | --------------- | --------------------------- |
-| default | option renderer | ^[object]`{ item: Option }` |
+| Name    | Description     |
+| ------- | --------------- |
+| default | option renderer |
 
 ## Type Declarations
 

@@ -6,7 +6,6 @@ import { getRowIdentity } from '../util'
 import { TABLE_INJECTION_KEY } from '../tokens'
 import useEvents from './events-helper'
 import useStyles from './styles-helper'
-import TdWrapper from './td-wrapper.vue'
 import type { TableBodyProps } from './defaults'
 import type { RenderRowData, TableProps, TreeNode } from '../table/defaults'
 
@@ -113,6 +112,7 @@ function useRender<T>(props: Partial<TableBodyProps<T>>) {
         }
         const baseKey = `${getKeyOfRow(row, $index)},${cellIndex}`
         const patchKey = columnData.columnKey || columnData.rawColumnKey || ''
+        const tdChildren = cellChildren(cellIndex, column, data)
         const mergedTooltipOptions =
           column.showOverflowTooltip &&
           merge(
@@ -123,7 +123,7 @@ function useRender<T>(props: Partial<TableBodyProps<T>>) {
             column.showOverflowTooltip
           )
         return h(
-          TdWrapper,
+          'td',
           {
             style: getCellStyle($index, cellIndex, row, column),
             class: getCellClass($index, cellIndex, row, column, colspan - 1),
@@ -134,9 +134,7 @@ function useRender<T>(props: Partial<TableBodyProps<T>>) {
               handleCellMouseEnter($event, row, mergedTooltipOptions),
             onMouseleave: handleCellMouseLeave,
           },
-          {
-            default: () => cellChildren(cellIndex, column, data),
-          }
+          [tdChildren]
         )
       })
     )

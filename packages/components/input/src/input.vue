@@ -305,6 +305,7 @@ const showPwdVisible = computed(
   () =>
     props.showPassword &&
     !inputDisabled.value &&
+    !props.readonly &&
     !!nativeInputValue.value &&
     (!!nativeInputValue.value || isFocused.value)
 )
